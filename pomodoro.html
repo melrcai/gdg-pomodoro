@@ -37,23 +37,9 @@
       <section class="panel glass-effect">
         <header class="panel-header">
           <div class="mode-switch">
-            <button id="focus-btn" class="mode-chip active" data-mode="focus">
-              Focus
-            </button>
-            <button
-              id="short-break-btn"
-              class="mode-chip"
-              data-mode="short-break"
-            >
-              Short Break
-            </button>
-            <button
-              id="long-break-btn"
-              class="mode-chip"
-              data-mode="long-break"
-            >
-              Long Break
-            </button>
+            <button id="focus-btn" class="mode-chip active" data-mode="focus"> Focus </button>
+            <button id="short-break-btn" class="mode-chip" data-mode="short-break" > Short Break </button>
+            <button id="long-break-btn" class="mode-chip" data-mode="long-break" > Long Break </button>
           </div>
         </header>
 
@@ -79,22 +65,12 @@
         </div>
 
         <div class="controls">
-          <button
-            class="btn-icon secondary"
-            id="reset-btn"
-            aria-label="Reset Timer"
-          >
+          <button class="btn-icon secondary" id="reset-btn" aria-label="Reset Timer" >
             <span class="material-symbols-rounded">restart_alt</span>
           </button>
 
-          <button
-            class="btn-fab primary"
-            id="toggle-btn"
-            aria-label="Start Timer"
-          >
-            <span class="material-symbols-rounded" id="toggle-icon"
-              >play_arrow</span
-            >
+          <button class="btn-fab primary" id="toggle-btn" aria-label="Start Timer" >
+            <span class="material-symbols-rounded" id="toggle-icon" >play_arrow</span > 
           </button>
 
           <div class="iteration-badge" title="Completed Sessions">
@@ -104,7 +80,14 @@
         </div>
 
 
-      </section>
+    <section id="task-manager">
+        <div>
+          <button class="btn-to-add" id="add-btn" aria-label="Add Task" >
+            <span class="material-symbols-rounded" id="add-icon" >add</span > 
+          </button>
+        </div>
+    </section>
+
     </main>
 
     <script type="module" src="./js/main.js"></script>
