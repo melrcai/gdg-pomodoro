@@ -17,6 +17,7 @@
     />
 
     <link rel="stylesheet" href="./styles/pomodoro.css" />
+    <!--<script>alert("This might be a illegal script. Are you sure you want to continue?");</script>-->
   </head>
   <body>
     <div class="gdg-decor-bg" aria-hidden="true">
@@ -80,13 +81,19 @@
         </div>
 
 
-    <section id="task-manager">
-        <div>
-          <button class="btn-to-add" id="add-btn" aria-label="Add Task" >
-            <span class="material-symbols-rounded" id="add-icon" >add</span > 
-          </button>
-        </div>
-    </section>
+      <section id="task-manager">
+          <div class="task-control">
+              <button class="btn-to-add" id="add-btn" aria-label="Add Task">
+                  <span class="material-symbols-rounded" id="add-icon">add</span> 
+                  <span class="btn-hover-text">Add Task</span>
+              </button>
+          </div>
+
+          <div id="task-list" class="hidden">
+              <ul id="tasks-ul">
+              </ul>
+          </div>
+      </section>
 
     </main>
 
