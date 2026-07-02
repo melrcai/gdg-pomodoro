@@ -89,8 +89,21 @@
               </button>
           </div>
 
+          <!-- will be hidden by default, and will be shown when the add task button is clicked -->
           <div id="task-list" class="hidden">
+            <form id="task-form">
+                <input
+                  type="text"
+                  id="task-input"
+                  placeholder="Enter your task"
+                  required 
+                  maxlength="50"
+                />
+                <button type="submit" id="submit-task-btn">Save Task</button>
+            </form>
+
               <ul id="tasks-ul">
+                <!-- tasks will be dynamically added here -->
               </ul>
           </div>
       </section>

@@ -29,6 +29,10 @@ const focusBtn = document.getElementById("focus-btn");
 const shortBreakBtn = document.getElementById("short-break-btn");
 const longBreakBtn = document.getElementById("long-break-btn");
 
+// add task button
+const addTaskBtn = document.getElementById("add-btn");
+const taskList = document.getElementById("task-list");
+
 // timer display update function
 function updateTimerDisplay() {
   const minutes = Math.floor(timeLeft / 60);
@@ -142,5 +146,11 @@ shortBreakBtn.addEventListener("click", () => {
 longBreakBtn.addEventListener("click", () => {
   setMode("long-break");
 });
+
+addTaskBtn.addEventListener("click", () => {
+  taskList.classList.toggle('hidden');
+  console.log('Add Task button clicked. Task list visibility toggled.');
+});
+
 
 updateTimerDisplay();

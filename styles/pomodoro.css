@@ -305,7 +305,7 @@ body {
 .btn-to-add {
   position: absolute;
   flex-direction: column;
-  bottom: 71px;
+  bottom: 126px;
   left: 30px;
   width: 60px;
   height: 60px;
@@ -339,4 +339,39 @@ body {
 #add-btn:hover {
   filter: brightness(1.1);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Task List */
+#task-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+#task-input {
+  flex-grow: 1;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+#task-input:focus {
+  border-color: var(--google-pink);
+}
+
+#submit-task-btn {
+  padding: 10px 16px;
+  background-color: var(--google-pink);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#submit-task-btn:hover {
+    background-color: #c02b44; 
 }
