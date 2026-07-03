@@ -33,6 +33,11 @@ const longBreakBtn = document.getElementById("long-break-btn");
 const addTaskBtn = document.getElementById("add-btn");
 const taskList = document.getElementById("task-list");
 
+// task input and list elements
+const taskForm = document.getElementById('task-form');
+const taskInput = document.getElementById('task-input');
+const tasksUl = document.getElementById('tasks-ul');
+
 // timer display update function
 function updateTimerDisplay() {
   const minutes = Math.floor(timeLeft / 60);
@@ -150,6 +155,24 @@ longBreakBtn.addEventListener("click", () => {
 addTaskBtn.addEventListener("click", () => {
   taskList.classList.toggle('hidden');
   console.log('Add Task button clicked. Task list visibility toggled.');
+});
+
+taskForm.addEventListener('submit', (event) => {
+  event.preventDefault(); 
+  const taskText = taskInput.value.trim();
+
+    if (taskText !== "") {
+        const newLi = document.createElement('li');
+
+      newLi.innerHTML = `
+          <span> ${taskText}</span>
+          <button class="delete-btn">&times;</button>
+      `;
+
+        tasksUl.appendChild(newLi);
+
+        taskInput.value = '';
+    }
 });
 
 
