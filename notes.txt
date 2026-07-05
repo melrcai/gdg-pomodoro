@@ -1,0 +1,3 @@
+[ ] add sub task inside the main task 
+[ ] configuring js to manipulate the time depends on what range of a main task must be completedk
+[ ] correlate task management functionality with the timer
