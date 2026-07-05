@@ -1,20 +1,19 @@
 /* GDG Color Palette & Variables */
 :root {
-  --google-blue: #4285f4;
-  --google-red: #ea4335;
-  --google-pink: #c5365f;
-  --google-yellow: #fbbc04;
-  --google-green: #34a853;
+  --google-focus:#E57373;
+  --google-s-break: #F06292;
+  --google-l-break: #BA68C8;
+  --google-task: #a16f5e;
   --google-grey: #5f6368;
 
   /* Theme Colors - Dynamic */
-  --theme-primary: var(--google-blue); /* Changes based on JS state */
+  --theme-primary: var(--google-focus); /* Changes based on JS state */
   --theme-bg: #202124;
 
   --text-high: #e8eaed;
   --text-med: #bdc1c6;
 
-  --font-display: "Google Sans", "Roboto", sans-serif;
+  --font-display: "Quicksand", "Roboto", sans-serif;
   --font-mono: "Roboto Mono", monospace;
 }
 
@@ -23,7 +22,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-/*  border: 1px solid red; /* Debugging */
+  /*border: 1px solid red; /* Debugging */
 }
 
 body {
@@ -71,16 +70,16 @@ body {
   letter-spacing: -0.5px;
 }
 .blue {
-  color: var(--google-blue);
+  color: var(--google-focus);
 }
 .red {
-  color: var(--google-red);
+  color: var(--google-l-break);
 }
 .yellow {
-  color: var(--google-yellow);
+  color: var(--google-s-break);
 }
 .green {
-  color: var(--google-green);
+  color: var(--google-task);
 }
 
 /* === Layout & Panel === */
@@ -192,7 +191,7 @@ body {
 }
 
 .timer-display {
-  font-family: var(--font-mono);
+  font-family: 'Fredoka', sans-serif;
   font-size: 4rem;
   font-weight: 500;
   z-index: 2;
@@ -211,7 +210,7 @@ body {
   align-items: center;
   gap: 24px;
   width: 100%;
-  justify-content: center;
+  justify-content: left;
   position: relative;
 }
 
@@ -269,8 +268,6 @@ body {
   right: 0;
 }
 
-
-
 /* === Mobile Adjustments === */
 @media (max-width: 480px) {
   .timer-container,
@@ -300,44 +297,51 @@ body {
   }
 }
 
-
 /* === Task Manager === */
-.btn-to-add {
-  position: absolute;
-  flex-direction: column;
-  bottom: 126px;
-  left: 30px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--google-pink);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+.hidden {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
 
+.btn-to-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  gap: 4px;
+  width: 63px;
+  height: 63px;
+  border-radius: 50%;
+  background: var(--google-task);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  position: relative;
 }
 
 #add-btn .btn-hover-text {
-  display: none;
+  position: absolute;
+  bottom: -25px;   
+  left: 50%;
+  transform: translateX(-50%) translateY(5px); 
   font-family: 'Arial', sans-serif; 
-  font-size: 12px;
-  vertical-align: middle;
-  margin-bottom: 14px;
+  font-size: 15px;
+  color: #b2b2b2; 
+  white-space: nowrap; 
+  
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 #add-btn:hover .btn-hover-text {
-  display: block;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0); 
 }
 
 #add-btn:hover {
-  filter: brightness(1.1);
+  filter: brightness(0.85);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
@@ -345,26 +349,28 @@ body {
 #task-form {
   display: flex;
   gap: 8px;
-  margin-top: 16px;
 }
 
 #task-input {
   flex-grow: 1;
   padding: 10px 12px;
   font-size: 0.95rem;
-  border: 1px solid #ddd;
+  font-family: var(--font-display);
+  background-color: rgba(30, 31, 32, 0.5);   
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   border-radius: 4px;
   outline: none;
   transition: border-color 0.3s ease;
 }
 
 #task-input:focus {
-  border-color: var(--google-pink);
+  border-color: var(--google-task);
 }
 
 #submit-task-btn {
   padding: 10px 16px;
-  background-color: var(--google-pink);
+  background-color: var(--google-task);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -373,5 +379,45 @@ body {
 }
 
 #submit-task-btn:hover {
-    background-color: #c02b44; 
+    background-color: #745044; 
+}
+
+#tasks-ul li {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; 
+    align-items: center;           
+    padding: 8px 12px;
+    margin: 8px 8px 0 0;
+
+    background-color: rgba(65, 66, 71, 0.85); 
+    border: 1px solid rgba(255, 255, 255, 0.08); 
+    border-radius: 6px;
+    color: #ffffff; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#tasks-ul li:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+ transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: none;       
+    border: none;           
+    color: #bbb;            
+    font-size: 1.3rem;      
+    cursor: pointer;        
+    padding: 0 4px;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease; 
+}
+
+#tasks-ul li:hover .delete-btn {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.delete-btn:hover {
+  color: var(--google-task) !important;
+  transform: scale(1.2);
 }
