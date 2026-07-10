@@ -86,8 +86,9 @@ body {
 .layout {
   flex: 1;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 1rem 1rem 3rem 1rem;
 }
 
@@ -275,11 +276,6 @@ body {
     width: 240px;
     height: 240px;
   }
-  .timer-ring circle {
-    r: 110;
-    cx: 120;
-    cy: 120;
-  }
   .timer-display {
     font-size: 3rem;
   }
@@ -349,6 +345,7 @@ body {
 #task-form {
   display: flex;
   gap: 8px;
+  margin-top: 16px;
 }
 
 #task-input {
