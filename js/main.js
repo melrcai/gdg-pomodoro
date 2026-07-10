@@ -3,9 +3,9 @@ const SHORT_BREAK_TIME = 5 * 60;
 const LONG_BREAK_TIME = 15 * 60;
 
 // colors 
-const FOCUS_COLOR = "var(--google-blue)";
-const SHORT_BREAK_COLOR = "var(--google-green)";
-const LONG_BREAK_COLOR = "var(--google-red)";
+const FOCUS_COLOR = "var(--google-focus)";
+const SHORT_BREAK_COLOR = "var(--google-s-break)";
+const LONG_BREAK_COLOR = "var(--google-l-break)";
 
 // global state variables
 let timeLeft = FOCUS_TIME;
@@ -22,7 +22,6 @@ const ringProgress = document.getElementById("ring-progress");
 const startBtn = document.getElementById("toggle-btn");
 const resetBtn = document.getElementById("reset-btn");
 const toggleIcon = document.getElementById("toggle-icon");
-
 
 // mode buttons
 const focusBtn = document.getElementById("focus-btn");
@@ -95,7 +94,7 @@ function resetTimer() {
    else if (currentMode === "short-break") timeLeft = SHORT_BREAK_TIME;
    else if (currentMode === "long-break") timeLeft = LONG_BREAK_TIME;
 
-  // Update the display
+  // update the display
   updateTimerDisplay();
  
 }
@@ -116,16 +115,22 @@ function setMode(mode) {
     focusBtn.classList.add("active");
     root.style.setProperty("--theme-primary", FOCUS_COLOR);
     timerLabel.textContent = "Time for a break!";
+
+    addTaskBtn.classList.remove('hidden');
   } else if (mode === "short-break") {
     timeLeft = SHORT_BREAK_TIME;
     shortBreakBtn.classList.add("active");
     root.style.setProperty("--theme-primary", SHORT_BREAK_COLOR);
     timerLabel.textContent = "Short break time!";
+
+    addTaskBtn.classList.add('hidden');
   } else if (mode === "long-break") {
     timeLeft = LONG_BREAK_TIME;
     longBreakBtn.classList.add("active");
     root.style.setProperty("--theme-primary", LONG_BREAK_COLOR);
     timerLabel.textContent = "Time for a long break!";
+
+    addTaskBtn.classList.add('hidden');
   }
   
   clearInterval(timerInterval);
@@ -140,6 +145,7 @@ startBtn.addEventListener("click", startTimer);
 
 resetBtn.addEventListener("click", resetTimer);
 
+//*  mode buttons 
 focusBtn.addEventListener("click", () => {
   setMode("focus");
 });
@@ -157,23 +163,33 @@ addTaskBtn.addEventListener("click", () => {
   console.log('Add Task button clicked. Task list visibility toggled.');
 });
 
+//* task form submission
 taskForm.addEventListener('submit', (event) => {
   event.preventDefault(); 
   const taskText = taskInput.value.trim();
 
     if (taskText !== "") {
-        const newLi = document.createElement('li');
+      const newLi = document.createElement('li');
 
       newLi.innerHTML = `
           <span> ${taskText}</span>
           <button class="delete-btn">&times;</button>
       `;
 
-        tasksUl.appendChild(newLi);
-
-        taskInput.value = '';
+      tasksUl.appendChild(newLi);
+      taskInput.value = '';
     }
 });
 
+//* delete task event delegation 
+tasksUl.addEventListener('click', (event) => {
+  const clickedElement = event.target; // event.target is the element that was clicked
+  if (clickedElement.classList.contains('delete-btn')) {
+    const liToDelete = clickedElement.closest('li');
+    if (liToDelete) {
+      liToDelete.remove()
+    }
+  }
+});
 
 updateTimerDisplay();

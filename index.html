@@ -7,6 +7,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <link
       href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto+Mono:wght@500&display=swap"
       rel="stylesheet"
@@ -17,7 +18,7 @@
     />
 
     <link rel="stylesheet" href="./styles/pomodoro.css" />
-    <!--<script>alert("This might be a illegal script. Are you sure you want to continue?");</script>-->
+    <script>alert("This might be a illegal script. Are you sure you want to continue?");</script>-->
   </head>
   <body>
     <div class="gdg-decor-bg" aria-hidden="true">
@@ -37,11 +38,11 @@
     <main class="layout">
       <section class="panel glass-effect">
         <header class="panel-header">
-          <div class="mode-switch">
+          <nav class="mode-switch">
             <button id="focus-btn" class="mode-chip active" data-mode="focus"> Focus </button>
             <button id="short-break-btn" class="mode-chip" data-mode="short-break" > Short Break </button>
             <button id="long-break-btn" class="mode-chip" data-mode="long-break" > Long Break </button>
-          </div>
+          </nav>
         </header>
 
         <div class="timer-container">
@@ -66,6 +67,14 @@
         </div>
 
         <div class="controls">
+
+          <div class="task-control">
+              <button class="btn-to-add" id="add-btn" aria-label="Add Task">
+                  <span class="material-symbols-rounded" id="add-icon">add</span> 
+                  <span class="btn-hover-text">Add Task</span>
+              </button>
+          </div>
+
           <button class="btn-icon secondary" id="reset-btn" aria-label="Reset Timer" >
             <span class="material-symbols-rounded">restart_alt</span>
           </button>
@@ -78,34 +87,29 @@
             <span class="material-symbols-rounded">check_circle</span>
             <span id="iteration-count">0</span>
           </div>
-        </div>
 
+
+        </div>
+      </section> 
 
       <section id="task-manager">
-          <div class="task-control">
-              <button class="btn-to-add" id="add-btn" aria-label="Add Task">
-                  <span class="material-symbols-rounded" id="add-icon">add</span> 
-                  <span class="btn-hover-text">Add Task</span>
-              </button>
-          </div>
+        <!-- hidden by default, and will be shown when the add task button is clicked -->
+        <div id="task-list" class="hidden">
+          <form id="task-form">
+              <input
+                type="text"
+                id="task-input"
+                placeholder="Enter your task"
+                required 
+                maxlength="50"
+              />
+              <button type="submit" id="submit-task-btn">Save Task</button>
+          </form>
 
-          <!-- will be hidden by default, and will be shown when the add task button is clicked -->
-          <div id="task-list" class="hidden">
-            <form id="task-form">
-                <input
-                  type="text"
-                  id="task-input"
-                  placeholder="Enter your task"
-                  required 
-                  maxlength="50"
-                />
-                <button type="submit" id="submit-task-btn">Save Task</button>
-            </form>
-
-              <ul id="tasks-ul">
-                <!-- tasks will be dynamically added here -->
-              </ul>
-          </div>
+            <ul id="tasks-ul">
+              <!-- tasks will be dynamically added here -->
+            </ul>
+        </div>
       </section>
 
     </main>
@@ -113,3 +117,4 @@
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>
+
