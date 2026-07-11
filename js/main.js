@@ -1,4 +1,4 @@
-const FOCUS_TIME = 25 * 60;
+const FOCUS_TIME = 0.1 * 60;
 const SHORT_BREAK_TIME = 5 * 60;
 const LONG_BREAK_TIME = 15 * 60;
 
@@ -36,6 +36,9 @@ const taskList = document.getElementById("task-list");
 const taskForm = document.getElementById('task-form');
 const taskInput = document.getElementById('task-input');
 const tasksUl = document.getElementById('tasks-ul');
+
+// iteration
+const iterationDisplay = document.getElementById("iteration-count");
 
 // timer display update function
 function updateTimerDisplay() {
@@ -81,6 +84,7 @@ function startTimer() {
         toggleIcon.textContent = "play_arrow";
         timerLabel.textContent = "Time's up!";
         alert("Time's up! Take a break or start another session."); 
+        incrementIteration();
       }
     }, 1000);
   }
@@ -191,5 +195,15 @@ tasksUl.addEventListener('click', (event) => {
     }
   }
 });
+
+//* iteration count
+iterationDisplay.textContent = "Iteration: 0"; 
+let iterationCount = 0;
+function incrementIteration() {
+  if (currentMode === "focus" && timeLeft === 0) {
+    iterationCount++;
+    iterationDisplay.textContent = `Iteration: ${iterationCount}`;
+  }
+}    
 
 updateTimerDisplay();
