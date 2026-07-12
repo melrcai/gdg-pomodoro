@@ -1,6 +1,6 @@
 const FOCUS_TIME = 0.1 * 60;
-const SHORT_BREAK_TIME = 5 * 60;
-const LONG_BREAK_TIME = 15 * 60;
+const SHORT_BREAK_TIME = 0.1 * 60;
+const LONG_BREAK_TIME = 0.1 * 60;
 
 // colors 
 const FOCUS_COLOR = "var(--google-focus)";
@@ -83,8 +83,8 @@ function startTimer() {
         isRunning = false;
         toggleIcon.textContent = "play_arrow";
         timerLabel.textContent = "Time's up!";
-        alert("Time's up! Take a break or start another session."); 
         incrementIteration();
+        alert("Time's up! Take a break or start another session."); 
       }
     }, 1000);
   }
@@ -164,7 +164,6 @@ longBreakBtn.addEventListener("click", () => {
 
 addTaskBtn.addEventListener("click", () => {
   taskList.classList.toggle('hidden');
-  console.log('Add Task button clicked. Task list visibility toggled.');
 });
 
 //* task form submission
@@ -175,13 +174,28 @@ taskForm.addEventListener('submit', (event) => {
     if (taskText !== "") {
       const newLi = document.createElement('li');
 
-      newLi.innerHTML = `
-          <span> ${taskText}</span>
-          <button class="delete-btn">&times;</button>
-      `;
+      newLi.addEventListener('click', () => {
+        const currentlyActive = tasksUl.querySelector('.active');
+        if (currentlyActive && currentlyActive !== newLi) {
+            currentlyActive.classList.remove('active');
+        }
+        newLi.classList.toggle('active');
+            if (newLi.classList.contains('active')) {
+              tasksUl.prepend(newLi);
+            }
+        });
 
-      tasksUl.appendChild(newLi);
-      taskInput.value = '';
+        newLi.innerHTML = `
+            <div class="task-main">
+              <span class="task-text">${taskText}</span>
+              <span class="iteration-count">0</span>
+                <span class="task-status" aria-hidden="true">○</span>
+            </div>
+            <button class="delete-btn">&times;</button>
+        `;
+
+        tasksUl.appendChild(newLi);
+        taskInput.value = '';
     }
 });
 
@@ -203,6 +217,17 @@ function incrementIteration() {
   if (currentMode === "focus" && timeLeft === 0) {
     iterationCount++;
     iterationDisplay.textContent = `Iteration: ${iterationCount}`;
+
+    const activeTask = tasksUl.querySelector('li.active');
+    if (activeTask) {
+      const sessionCount = activeTask.querySelector('.iteration-count');
+      const taskStatus = activeTask.querySelector('.task-status');
+      const nextCount = parseInt(sessionCount.textContent, 10) + 1;
+
+      sessionCount.textContent = String(nextCount);
+      taskStatus.textContent = '✓';
+      activeTask.classList.add('completed');
+    }
   }
 }    
 
