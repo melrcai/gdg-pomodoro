@@ -12,6 +12,8 @@ let timeLeft = FOCUS_TIME;
 let isRunning = false;
 let currentMode = "focus";
 let timerInterval = null;
+const TIMER_DONE_SOUND = "./assets/timer-done.mp3";
+let timerDoneAudio = null;
 
 // display elements
 const timerDisplay = document.getElementById("timer-display");
@@ -61,15 +63,45 @@ function updateTimerDisplay() {
   ringProgress.style.strokeDashoffset = progress;   
 }
 
-// start timer
+function playTimerDoneSound() {
+  if (typeof Audio === "undefined") return; 
+
+  if (!timerDoneAudio) {  
+    timerDoneAudio = new Audio(TIMER_DONE_SOUND); 
+    timerDoneAudio.preload = "auto"; 
+    timerDoneAudio.loop = true; 
+  }
+
+  timerDoneAudio.currentTime = 0;
+  timerDoneAudio.play().catch(() => {
+    console.warn(`Could not play timer sound from ${TIMER_DONE_SOUND}`);
+  });
+}
+
+function stopTimerDoneSound() {
+  if (timerDoneAudio) {
+    timerDoneAudio.pause();
+    timerDoneAudio.currentTime = 0; 
+  }
+} 
+
 function startTimer() {
+  if (!isRunning && timeLeft === 0) {
+    stopTimerDoneSound();
+    toggleIcon.textContent = "play_arrow";
+    timerLabel.textContent = "Paused";
+    return;
+  }
+
   if (isRunning) {
     clearInterval(timerInterval);
     isRunning = false;
     toggleIcon.textContent = "play_arrow";
     timerLabel.textContent = "Paused"; 
+    stopTimerDoneSound(); 
     
   } else {
+    stopTimerDoneSound();
     isRunning = true;
     toggleIcon.textContent = "pause";
     timerLabel.textContent = currentMode === "focus" ? "Stay focused!" : "Take a break!";
@@ -81,10 +113,9 @@ function startTimer() {
       } else {
         clearInterval(timerInterval);
         isRunning = false;
-        toggleIcon.textContent = "play_arrow";
         timerLabel.textContent = "Time's up!";
+        playTimerDoneSound();
         incrementIteration();
-        alert("Time's up! Take a break or start another session."); 
       }
     }, 1000);
   }
@@ -94,15 +125,15 @@ function startTimer() {
 function resetTimer() {
   clearInterval(timerInterval);
   isRunning = false;
+  stopTimerDoneSound();
   if (currentMode === "focus") timeLeft = FOCUS_TIME;
    else if (currentMode === "short-break") timeLeft = SHORT_BREAK_TIME;
    else if (currentMode === "long-break") timeLeft = LONG_BREAK_TIME;
+  toggleIcon.textContent = "play_arrow";
+  timerLabel.textContent = currentMode === "focus" ? "Time for a break!" : "Take a break!";
 
-  // update the display
   updateTimerDisplay();
- 
 }
-
 
 // mode switching function
 function setMode(mode) {
@@ -139,6 +170,7 @@ function setMode(mode) {
   
   clearInterval(timerInterval);
   isRunning = false;
+  stopTimerDoneSound();
   toggleIcon.textContent = "play_arrow"; 
   
   updateTimerDisplay();
