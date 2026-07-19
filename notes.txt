@@ -1,3 +1,0 @@
-[x] correlate task management functionality with the timer
-[x] add sound
-[ ] make the sound playable for mobile
