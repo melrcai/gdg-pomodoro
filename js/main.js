@@ -38,6 +38,7 @@ const taskList = document.getElementById("task-list");
 const taskForm = document.getElementById('task-form');
 const taskInput = document.getElementById('task-input');
 const tasksUl = document.getElementById('tasks-ul');
+const countTasks = document.querySelectorAll(".task-item").length; 
 
 // iteration
 const iterationDisplay = document.getElementById("iteration-count");
@@ -135,6 +136,12 @@ function resetTimer() {
   updateTimerDisplay();
 }
 
+// task count
+function updateTaskCount() {
+  const taskCount = document.querySelectorAll('#tasks-ul li').length;
+  document.getElementById('task-count').textContent = `Tasks: ${taskCount}`;
+}
+
 // mode switching function
 function setMode(mode) {
   currentMode = mode;
@@ -205,6 +212,7 @@ taskForm.addEventListener('submit', (event) => {
 
     if (taskText !== "") {
       const newLi = document.createElement('li');
+      newLi.classList.add('task-item');
 
       newLi.addEventListener('click', () => {
         const currentlyActive = tasksUl.querySelector('.active');
@@ -228,6 +236,8 @@ taskForm.addEventListener('submit', (event) => {
 
         tasksUl.appendChild(newLi);
         taskInput.value = '';
+
+        updateTaskCount();
     }
 });
 
@@ -238,6 +248,8 @@ tasksUl.addEventListener('click', (event) => {
     const liToDelete = clickedElement.closest('li');
     if (liToDelete) {
       liToDelete.remove()
+
+      updateTaskCount();
     }
   }
 });

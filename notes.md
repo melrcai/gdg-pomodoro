@@ -7,9 +7,9 @@
 ### function/s that is rqrd to implement
 
 #### 1. `updateTaskCount(taskElement)`
-- count the no. in the list
-- update the 'task-count-num' element w the count
-- show "no active tasks" if the list is empty
+* [x] count the no. in the list
+- [x] update the 'task-count-num' element w the count
+- [ ] show "no active tasks" if the list is empty
 
 ---
 
