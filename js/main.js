@@ -140,6 +140,10 @@ function resetTimer() {
 function updateTaskCount() {
   const taskCount = document.querySelectorAll('#tasks-ul li').length;
   document.getElementById('task-count').textContent = `Tasks: ${taskCount}`;
+
+  if (taskCount === 0) {
+  document.getElementById('task-count').textContent = `No Active Tasks: ${taskCount}`;
+  }
 }
 
 // mode switching function

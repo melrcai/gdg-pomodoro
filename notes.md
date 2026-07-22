@@ -1,15 +1,15 @@
 [x] correlate task management functionality with the timer  
 [x] add sound  
-[ ] make the sound playable for mobile
+[x] make the sound playable for mobile
 
 ---
 
 ### function/s that is rqrd to implement
 
 #### 1. `updateTaskCount(taskElement)`
-* [x] count the no. in the list
+- [x] count the no. in the list
 - [x] update the 'task-count-num' element w the count
-- [ ] show "no active tasks" if the list is empty
+- [x] show "no active tasks" if the list is empty
 
 ---
 
